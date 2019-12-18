@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Xác nhận đơn hàng</title>
+    <link rel="stylesheet" href="/Css/cf_order.css">
+    <script src="https://kit.fontawesome.com/32b2689684.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1 id="title"><a href="/order">ORIGINAL <span>COFFEE</span><sub>ORDER</sub></a></h1>
+        <ul id='links'>
+            <a href="/menu">MENU</a>
+            <a href="/order">MUA NGAY</a>
+            <a class="active" href="/confirmOrd">GIỎ HÀNG</a>
+            <a href="/donhang">ĐƠN HÀNG</a>
+        </ul>
+
+    </header>
+
+    <h4 id="xacnhan">Xác nhận đặt hàng<i class="fas fa-thumbs-up"></i></h4>
+    <div id="nhap_thongtin">
+        <h3 id="note">Vui lòng nhập đầy đủ thông tin</h3>
+        <form method="post" action="/thongtin">
+            <div id="thongtin">
+                <input class="thongtin" id="diachi" type='text' placeholder="Nhập địa chỉ giao hàng" name="diachi">
+                <div id="hoten_sdt">
+                    <input class="thongtin" id="hoten" type=text placeholder="Tên người nhận" name="hoten">
+                    <input class="thongtin" id="sdt" type='text' placeholder="Số điện thoại" name="sodienthoai">
+                </div>
+                <input class="thongtin" id="ghichu" type="text" placeholder="Ghi chú thêm" name="ghichu">
+            </div>
+            <div id="thanhtoan">
+                <h3>Hình thức thanh toán: </h3>
+            </div>
+            <p id="tructiep">Khách hàng vui lòng thanh toán trực tiếp khi nhận hàng.</p>
+            <button tpye="submit" id="btn_dathang">ĐẶT HÀNG</button>
+
+
+        </form>
+        <br>
+
+
+        <div id="dat_hang">
+            <h3 id="tt_donhang">Thông tin đơn hàng</h3>
+            <p id="km">*Khuyến mãi 15% (áp dụng vào tổng giá trị đơn hàng)</p>
+            <form id="thongtin_donhang">
+                <table id="tt_don">
+                    <tr class="header">
+                        <th style="width:45%;">Tên</th>
+                        <th style="width:0%;">Số lượng</th>
+                        <th style="width:30%;">Giá</th>
+                        <th style="width:25%;">Cập nhật</th>
+                    </tr>
+            </form>
+            <script>
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        var thongtin = JSON.parse(this.responseText);
+                        var kq = "";
+                        var tong = 0;
+                        var km = 0;
+                        thongtin.forEach(i => {
+                            var khuyemnai = (i.soluong * i.gia) * 0.15;
+                            var tongso = (i.soluong * i.gia) * 0.75;
+                            km += khuyemnai;
+                            tong += tongso
+                            kq += '<tr>' +
+                                ' <td>' + i.ten + '</td>' +
+                                ' <td>' + i.soluong + '</td>' +
+                                ' <td>' + i.gia + ' vnd</td>' +
+                                ' <td>' +
+                                ' <button class="btn_capnhat"> <a title="Xóa 1 thức uống" href="/xoacart/' + i.ten + '" >-</a></button> ' +
+                                ' <button class="btn_capnhat"> <a  title="Thêm 1 thức uống" href="/themcart/' + i.ten + '" >+</a></button> ' +
+                                '</td>' +
+                                ' </tr>'
+                        });
+                        document.getElementById('tt_don').innerHTML += kq;
+                        document.getElementById('tt_don').innerHTML += '<tr>' +
+                            '<td style="font-size: 18px; color: grey"> Giảm:  </td>' +
+                            '<td>  </td>' +
+                            '<td style="font-size: 18px; color: grey">-' + km + ' vnd</td>' +
+                            '<td ></td>' +
+                            '</tr>' +
+
+                            '<tr>' +
+                            '<td style="font-size: 22px; color: red;">Tổng giá:  </td>' +
+                            '<td> </td>' +
+                            '<td style="font-size: 18px;color: red">' + tong + 'vnd</td>' +
+                            '<td ></td>' +
+                            '</tr>';
+                    }
+                }
+                xhttp.open("GET", "/thongtin_donhang", false);
+                xhttp.send();
+            </script>
+        </div>
+
+
+        <script>
+            document.getElementById('btn_dathang').onclick = () => {
+                alert("Đặt hàng thành công..!!!");
+            }
+        </script>
+
+</body>
+<footer id="ft">
+    <h6 id="title_ft">Đồ án Kỹ Thuật Phần Mềm 1</h6>
+    <h6 id="ten_ft">Trần Duy Khang || Nguyễn Minh Luân</h6>
+</footer>
+
+
+</html>

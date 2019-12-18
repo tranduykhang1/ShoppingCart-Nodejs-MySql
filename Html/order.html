@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>ORDER</title>
+    <script src="https://kit.fontawesome.com/32b2689684.js"></script>
+    <script src="/JS/menu.js"></script>
+    <link rel="stylesheet" href="/Css/order.css">
+</head>
+
+<body>
+    <header>
+        <h1 id="title"><a href="/menu">ORIGINAL <span>COFFEE</span><sub>ORDER</sub></a></h1>
+        <ul id='links'>
+            <a href="/menu">MENU</a>
+            <a class="active" href="">MUA NGAY</a>
+            <a href="/confirmOrd">GIỎ HÀNG</a>
+            <a href="/donhang">ĐƠN HÀNG</a>
+        </ul>
+
+    </header>
+
+    <section id="giohang">
+        <a class="linkcart" href="/confirmOrd"> <button id="btn-giohang"> ĐI ĐẾN GIỎ HÀNG <span id="cart">(0)</span></button > </a>
+       
+
+        <div id="sp_in_cart" class="sp_in_c">
+                
+        </div>
+    </section>
+    <div id="danh-muc">
+        <div id="danhmuc">DANH MỤC THỨC UỐNG</div>
+        <a href="#cafe">
+            <div class="dm-menu">Cà phê</div>
+        </a>
+        <a href="#daxay">
+            <div class="dm-menu" id="active">Đá xay</div>
+        </a>
+        <a href="#tra">
+            <div class="dm-menu">Trà</div>
+        </a>
+        <a href="#sinhto">
+            <div class="dm-menu">Sinh tố</div>
+        </a>
+    </div>
+
+    <div id="search-bar">
+        <input id="timkiem" type="search" placeholder="Tìm kiếm thức uống...">
+        <button id="search-box" title="Tim kiem">
+            <i id="icon-search" class="fas fa-search"></i>
+        </button>
+            </div>
+            <section id="free-ship">
+                <div id="giao-hang-icon">
+                    <i class="fas fa-shipping-fast"></i>
+                </div>
+                <p id="giaohang">Giao hàng miễn phí và nhanh chóng</p>
+            </section>
+
+
+            <div id="menu">
+                <div class="menu-all" id="cafe">
+                    <h3 class="loaithucuong">Cà phê</h3>
+
+                    <script>
+                        var xhttp = new XMLHttpRequest();
+                        var phuongthuc = "GET";
+                        var dongbo = false;
+                        xhttp.onreadystatechange = function() {
+                            if (this.readyState == 4 && this.status == 200) {
+                                var cafe = JSON.parse(this.responseText);
+                                let kqcf = "";
+                                cafe.forEach(function(cf) {
+                                    kqcf += // '<form action="/them/id_thucuong" method = "POST" >' +
+                                        '<div class="menu">' +
+                                        // '<input type="hidden" id="ma_thucuong"  name="id_thucuong" value="' + cf.id_thucuong + '"/>' +
+                                        '<img src = "' + cf.anh_thucuong + '"title="Ảnh thức uống">' +
+                                        '<div class="ten-gia">' +
+                                        '<h3 class="ten-tu">' + cf.ten_thucuong + '</h3>' +
+                                        '<h4>' + cf.gia_thucuong + 'VNĐ</h4>' +
+                                        '</div>' +
+                                        '<a class="them" title="Thêm vào giỏ hàng" href="/them/' + cf.id_thucuong + '" onclick="themgh()">' + '<i class="fas fa-plus"> </i>' + '</a>' +
+                                        '</div>';
+                                    // '</form>';
+                                });
+                                document.getElementById('cafe').innerHTML += kqcf;
+                            }
+                        }
+                        xhttp.open(phuongthuc, "/menucafe", dongbo);
+                        xhttp.send();
+                    </script>
+                </div>
+                <div class="menu-all" id="daxay">
+                    <h3 class="loaithucuong">Đá xay</h3>
+                    <script>
+                        xhttp.onreadystatechange = function() {
+                            if (this.readyState == 4 && this.status == 200) {
+                                var daxay = JSON.parse(this.responseText);
+                                let kqdx = "";
+                                daxay.forEach(function(dx) {
+                                    kqdx += '<div class="menu">' +
+                                        '<img src = "' + dx.anh_thucuong + '"title="Ảnh thức uống">' +
+                                        '<div class="ten-gia">' +
+                                        '<h3 class="ten-tu">' + dx.ten_thucuong + '</h3>' +
+                                        '<h4>' + dx.gia_thucuong + 'VNĐ</h4>' +
+                                        '</div>' +
+                                        '<a class="them" title="Thêm vào giỏ hàng"  href="/them/' + dx.id_thucuong + '"  onclick="themgh()">' + '<i class="fas fa-plus"></i>' + '</a>' +
+                                        '</div>';
+                                });
+                                document.getElementById('daxay').innerHTML += kqdx;
+                            }
+                        }
+                        xhttp.open(phuongthuc, "/menudaxay", dongbo);
+                        xhttp.send();
+                    </script>
+                </div>
+
+
+                <div class="menu-all" id="tra">
+                    <h3 class="loaithucuong">Trà</h3>
+                    <script>
+                        xhttp.onreadystatechange = function() {
+                            if (this.readyState == 4 && this.status == 200) {
+                                var tra = JSON.parse(this.responseText);
+                                let kqtra = "";
+                                tra.forEach(function(tr) {
+                                    kqtra += '<div class="menu">' +
+                                        '<img src = "' + tr.anh_thucuong + '"title="Ảnh thức uống">' +
+                                        '<div class="ten-gia">' +
+                                        '<h3 class="ten-tu">' + tr.ten_thucuong + '</h3>' +
+                                        '<h4>' + tr.gia_thucuong + 'VNĐ</h4>' +
+                                        '</div>' +
+                                        '<a class="them" title="Thêm vào giỏ hàng" href="/them/' + tr.id_thucuong + '"  onclick="themgh()">' + '<i class="fas fa-plus"></i>' + '</a>' +
+                                        '</div>';
+                                });
+                                document.getElementById('tra').innerHTML += kqtra;
+                            }
+                        }
+                        xhttp.open(phuongthuc, "/menutra", dongbo);
+                        xhttp.send();
+                    </script>
+                </div>
+                <div class="menu-all" id="sinhto">
+                    <h3 class="loaithucuong">Sinh tố</h3>
+                    <script>
+                        xhttp.onreadystatechange = function() {
+                            if (this.readyState == 4 && this.status == 200) {
+                                var sinhto = JSON.parse(this.responseText);
+                                let kqsinhto = "";
+                                sinhto.forEach(function(st) {
+                                    kqsinhto += '<div class="menu">' +
+                                        '<img src = "' + st.anh_thucuong + '"title="Ảnh thức uống">' +
+                                        '<div class="ten-gia">' +
+                                        '<h3 class="ten-tu">' + st.ten_thucuong + '</h3>' +
+                                        '<h4>' + st.gia_thucuong + 'VNĐ</h4>' +
+                                        '</div>' +
+                                        '<a class="them" title="Thêm vào giỏ hàng"  href="/them/' + st.id_thucuong + '"  onclick="themgh()">' + '<i class="fas fa-plus"></i>' + '</a>' +
+                                        '</div>';
+                                });
+                                document.getElementById('sinhto').innerHTML += kqsinhto;
+                            }
+                        }
+                        xhttp.open(phuongthuc, "/menusinhto", dongbo);
+                        xhttp.send();
+                    </script>
+                </div>
+            </div>
+
+
+            <footer>
+                <h6 id="title_ft">Đồ án Kỹ Thuật Phần Mềm 1</h6>
+                <h6 id="ten_ft">Trần Duy Khang || Nguyễn Minh Luân</h6>
+            </footer>
+</body>
+<script>
+    // var search = document.getElementById("timkiem").onclick = (event) => {
+    //     document.getElementById("timkiem").style.background = "#F0F0F0";
+    //     document.getElementById("icon-search").style.color = "#CD5507";
+    // }
+
+    function themgh() {
+        alert("Đã thêm sản phẩm vào giỏ hàng");
+    }
+</script>
+
+<script>
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var data = JSON.parse(this.responseText);
+            var kq = "";
+            var spham = "";
+            kq = '<span id="cart">(' + data.length + ')</span>';
+            document.getElementById('cart').innerHTML = kq;
+
+            data.forEach(sp => {
+                spham += '<table id="tbl_giohang">' +
+                    '<tr>' +
+                    '<td width="50%">' + sp.ten + '</td>' +
+                    '<td width="5%">x' + sp.soluong + '</td>' +
+                    '<th width="45%">' + sp.gia + ' VNĐ</th>' +
+                    ' </tr>' +
+                    '</table>';
+            })
+            if (data.length == 0) {
+                document.getElementById('sp_in_cart').innerHTML = "Trống";
+                document.getElementById('sp_in_cart').style.textAlign = "center";
+            }
+            document.getElementById('sp_in_cart').innerHTML += spham;
+
+        }
+    }
+    xhttp.open("GET", "/soluong", false);
+    xhttp.send();
+</script>
+
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/Css/admin.css">
+    <script src="/JS/adminjs.js"></script>
+    <title>Admin</title>
+</head>
+
+<body>
+    <header id="header">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+            <div class="container">
+                <h1 id="title" class="navbar-brand">ORIGINAL COFFEE <br/>Admin</h1>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/adminpage">THỨC UỐNG</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/donhang">ĐƠN HÀNG
+                                </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/dathang">ĐẶT HÀNG
+                                </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/khachhang">KHÁCH HÀNG</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/phanhoi">PHẢN HỒI</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/thongke">THỐNG KÊ
+                                </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/dm_km">DM - KM
+                                        </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!--THem-->
+    <form class="form " role="form " autocomplete="off" method="post" action="/admin/themthucuong">
+        <div class="modal fade" id="them_thucuong">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Thêm thức uống</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="form-group row ">
+                            <label class="col-lg-3 col-form-label form-control-label ">Mã thức uống</label>
+                            <div class="col-lg-7 ">
+                                <input class="form-control " type="text " name="matu ">
+                            </div>
+                        </div>
+                        <div class="form-group row ">
+                            <label class="col-lg-3 col-form-label form-control-label ">Tên thức uống</label>
+                            <div class="col-lg-7 ">
+                                <input class="form-control " type="text " name="tentu">
+                            </div>
+                        </div>
+                        <div class="form-group row ">
+                            <label class="col-lg-3 col-form-label form-control-label ">Mã danh mục</label>
+                            <div class="col-lg-7 ">
+                                <input class="form-control " name="madm">
+                            </div>
+                        </div>
+                        <div class="form-group row ">
+                            <label class="col-lg-3 col-form-label form-control-label ">Mã khuyến mãi</label>
+                            <div class="col-lg-7 ">
+                                <input class="form-control " name="makm">
+                            </div>
+                        </div>
+                        <div class="form-group row ">
+                            <label class="col-lg-3 col-form-label form-control-label ">Ảnh thức uống</label>
+                            <div class="col-lg-7 ">
+                                <input class="form-control " name="anhtu">
+                            </div>
+                        </div>
+                        <div class="form-group row ">
+                            <label class="col-lg-3 col-form-label form-control-label ">Giá</label>
+                            <div class="col-lg-7 ">
+                                <input class="form-control " name="giatu">
+                            </div>
+                        </div>
+                        <div class="form-group row ">
+                            <label class="col-lg-3 col-form-label form-control-label ">Ghi chú</label>
+                            <div class="col-lg-7 ">
+                                <input class="form-control " name="ghichu">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="col-auto ">
+                            <button type="submit" class="btn btn-primary">Thêm</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!--form sua-->
+
+
+    <!---->
+
+    </div>
+    <h5 class="don_hang ">Danh sách thức uống trong menu</h5>
+    <table id="tbl_thucuong" class="table ">
+        <thead>
+            <tr>
+                <th scope="col ">Mã thức uống</th>
+                <th scope="col ">Tên thức uống</th>
+                <th scope="col ">Danh mục</th>
+                <th scope="col ">Giá</th>
+                <th scope="col ">Cập nhập</th>
+            </tr>
+        </thead>
+    </table>
+    <a href="#title"><button id="btn_them" type="button" class="btn btn-primary" data-toggle="modal" data-target="#them_thucuong">Thêm</button></a>
+
+    <script>
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                let data = JSON.parse(this.responseText);
+                var kq = " ";
+                data.forEach(function(t_uong) {
+                    kq +=
+                        '  <tbody>' +
+                        ' <tr>' +
+                        ' <th scope="row ">' + t_uong.id_thucuong + '</th>' +
+                        ' <td>' + t_uong.ten_thucuong + '</td>' +
+                        ' <td>' + t_uong.ten_danhmuc + '</td>' +
+                        ' <td>' + t_uong.gia_thucuong + ' VNĐ</td>' +
+                        ' <td>' +
+                        '<a href="/admin/sua/' + t_uong.id_thucuong + '"><button id="btn_sua" type="button" class="btn btn-warning"data-toggle="modal" data-target="#sua_thucuong">Sửa</button></a>' +
+                        '<a href="/admin/xoa/' + t_uong.id_thucuong + '"><button type="button"  class="btn btn-danger"" >Xoá</button></a>' +
+                        '</td>' +
+                        ' </tr>' +
+                        '  </tbody>'
+                })
+                document.getElementById('tbl_thucuong').innerHTML += kq;
+            };
+        };
+        xhttp.open("GET", "/admin/thucuong", false);
+        xhttp.send();
+    </script>
+
+    <div id="dautrang">
+        <a href="#" title="Đầu trang">^</a>
+    </div>
+
+</body>
+
+
+
+</html>

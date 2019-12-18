@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" id="dautrang">
+
+<head>
+    <title>Original Coffee</title>
+    <link rel='stylesheet' href="/Css/style.css" media="screen" />
+    <script src="https://kit.fontawesome.com/32b2689684.js"></script>
+</head>
+
+<header class="nav-bar" id="nav">
+    <a href="/Html/home.html">
+        <h1 id="title">ORIGINAL <span>COFFEE</span></h1>
+    </a>
+    <ul id='links'>
+        <a href="home" target="_blank" class="active">TRANG CHỦ</a>
+        <a href="">GIỚI THIỆU</a>
+        <a href="/menu">MENU</a>
+        <a href="">MUA NGAY</a>
+        <a href="/donhang">ĐƠN HÀNG</a>
+    </ul>
+</header>
+
+<body>
+
+    <div class="slides-container">
+        <div class="slides fade">
+            <a href=""><img class="img" src="/Images/Qc2.png"></a>
+        </div>
+        <div class="slides fade">
+            <img class="img" src="/Images/qc3.png">
+        </div>
+        <div class="slides fade">
+            <img class="img" src="/Images/daxay.jpg">
+        </div>
+        <a href="#menu-list">
+            <h3 id='down'>XEM THÊM</h3>
+        </a>
+    </div>
+    <h3 id=menu-1>DANH MỤC THỨC UỐNG: </h3>
+    <div id="menu-list">
+        <div id="cafe" class="drinks">
+            <a href="oder.html" target="_blank"><img class="menu-img" src="/Image/menu_cafeden.jpg" title="Cà Phê" />
+                <div class="over-cf over">
+                    <h3 class="drink">CÀ PHÊ</h3>
+                </div>
+            </a>
+        </div>
+        <div id="sinhto" class="drinks">
+            <a href="oder.html" target="_blank"> <img class="menu-img" src="/Img_product/stcam.jpg" title="Bạc Xỉu" />
+                <div class="over-sinhto over">
+                    <h3 class="drink">SINH TỐ</h3>
+                </div>
+            </a>
+        </div>
+        <div id="daxay" class="drinks">
+            <a href="oder.html" target="_blank"><img class="menu-img" src="/Image/menu_bacxiu.jpg" title="Đá xay" />
+                <div class="over-bacxiu over">
+                    <h3 class="drink">BẠC XỈU</h3>
+                </div>
+            </a>
+        </div>
+        <div id="khac" class="drinks">
+            <a href="oder.html" target="_blank"> <img class="menu-img" src="/Img_product/tramatcha.jpg" title="Trà" />
+                <div class="over-khac over">
+                    <h3 style="margin-left: 80px" class="drink">TRÀ</h3>
+                </div>
+            </a>
+
+        </div>
+    </div>
+    <div id="xemmenu">
+        <a href="/Html/menu.html" id="xemmn">XEM TẤT CẢ</a>
+    </div>
+
+
+    <footer>
+        <h2 id="phan-hoi">Góp ý cho chúng tôi</h2>
+        <div class="phanhoi">
+            <form class="fr-phanhoi" method="POST" action="/khachhang/phanhoi">
+                <label id='ph-hoten'>Họ Và Tên:</label>
+                <input name="hoten_ph" id="phhoten" type="text" />
+                <label id='ph-sdt'>Số điện thoại:</label>
+                <input name="sdt_ph" id="phsdt" type="text" />
+                <label id='ph-noidung'>Nội dung phản hồi/góp ý:</label>
+                <textarea name="noidung_ph" id="phnoidung" type="text"></textarea>
+                <button id="btn-gui" type="submit">Gửi<i class="fas fa-paper-plane"></i></button>
+            </form>
+            <iframe id="fbplugin" src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FOriginal-Coffee-100322098068044%2F%3Fmodal%3Dadmin_todo_tour&tabs=timeline&width=300&height=315&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
+                width="300" height="315" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media">            
+        </iframe>
+            <div id="lendautrang">
+                <a href="#dautrang" id="len"><i class="fas fa-chevron-up"></i> <br>Đầu trang</a>
+            </div>
+
+        </div>
+        <div id="copy-right">
+            <h6>Đồ án 1 | Kỹ Thuật Phần Mềm K5</h6>
+        </div>
+    </footer>
+</body>
+
+<script>
+    //Giu menu khi keo man hinh
+    window.onscroll = () => {
+        keomenu()
+    };
+
+    function keomenu() {
+        if (document.body.scrollTop > 1 || document.documentElement.scrollTop > 1) {
+            document.getElementById("nav").style.background = "#FFF5E5";
+            document.getElementById("nav").style.opacity = ".9";
+        } else {
+            document.getElementById("nav").style.background = "none";
+            document.getElementById("nav").style.opacity = "1";
+        }
+    }
+    // slide anh
+    var slide = 0;
+    Hienthi();
+
+    function Hienthi() {
+        var i;
+        var slides = document.getElementsByClassName("slides");
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slide++;
+        if (slide > slides.length) {
+            slide = 1;
+        }
+        slides[slide - 1].style.display = "block";
+        setTimeout(Hienthi, 3000); //Thay đổi ảnh sau 3s
+    }
+
+
+    document.getElementById('btn-gui').onclick = () => {
+        alert('Cảm ơn bạn đã phản hồi đến chúng tôi.');
+    }
+</script>
+
+</html>

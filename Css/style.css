@@ -1,0 +1,416 @@
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: linear-gradient( to bottom, white, rgb(250, 237, 237));
+    background-attachment: fixed;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+/*Design header */
+
+header {
+    top: 0;
+    background: #f5f5f5;
+    height: 80px;
+    padding: 20px;
+    position: absolute;
+}
+
+span {
+    color: black;
+}
+
+#title {
+    color: #CD5507;
+    margin-top: 0px;
+    margin-left: 15px;
+    font-size: 40px;
+    font-family: fantasy;
+    border-bottom: 4px solid;
+    padding-left: 25px;
+    padding-bottom: 5px;
+    width: 350px;
+    transition: 1s ease-in-out;
+}
+
+.nav-bar {
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+    transition: 1s;
+}
+
+ul {
+    float: right;
+    margin-right: 50px;
+    margin-top: -40px;
+}
+
+ul a {
+    color: black;
+    font-size: 14px;
+    transition: 0.3s ease-in-out;
+    padding: 0px 0px 21px 0px;
+    margin: 17px;
+    font-family: Verdana;
+    white-space: nowrap;
+}
+
+.active,
+ul a:hover {
+    color: #CD5507;
+    border-bottom: 3px solid;
+}
+
+#search-bar {
+    justify-content: center;
+}
+
+
+/*Slide show*/
+
+.slides-container {
+    display: inline;
+    position: absolute;
+    top: 100px;
+    margin: auto;
+}
+
+.fade {
+    animation-name: showanh;
+    animation-duration: 3s;
+}
+
+@keyframes showanh {
+    from {
+        opacity: .5;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+img {
+    cursor: pointer;
+}
+
+.slides {
+    display: none;
+}
+
+.slides .img {
+    transition: .1s;
+    position: relative;
+    width: 1065px;
+    height: 600px;
+    transform: translate(20%, 0);
+    box-shadow: 1px 1px 10px rgb(59, 59, 59);
+}
+
+#down {
+    margin-bottom: 50px;
+    position: absolute;
+    text-align: center;
+    margin-left: 64%;
+    color: white;
+    width: 150px;
+    font-family: cursive;
+    transition: .8s ease-in-out;
+    animation-name: xemthem;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}
+
+#down:hover {
+    color: white;
+    font-size: 20px;
+    border: 1px solid white;
+    padding: 5px;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+@keyframes xemthem {
+    0% {
+        margin-top: -100px;
+    }
+    50% {
+        margin-top: -105px;
+    }
+    100% {
+        margin-top: -100px;
+    }
+}
+
+#menu-list {
+    margin-top: 50px;
+    margin-left: 340px;
+    position: absolute;
+}
+
+.menu-img {
+    margin-top: 20px;
+    width: 200px;
+    height: 200px;
+    margin: 0;
+    background-image: rgba(0, 0, 0, 0.5);
+    transition: 0.5s;
+}
+
+
+/*Overplay hover*/
+
+.over-cf {
+    cursor: pointer;
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    right: 0;
+    background-color: rgb(0, 0, 0, 0.5);
+    overflow: hidden;
+    width: 200px;
+    height: 98%;
+    transition: .5s ease;
+}
+
+.over-sinhto {
+    cursor: pointer;
+    position: absolute;
+    bottom: 5px;
+    left: 205px;
+    right: 0;
+    background-color: rgb(0, 0, 0, 0.5);
+    overflow: hidden;
+    width: 200px;
+    height: 98%;
+    transition: .5s ease;
+}
+
+.over-bacxiu {
+    cursor: pointer;
+    position: absolute;
+    bottom: 5px;
+    left: 407px;
+    right: 0;
+    background-color: rgb(0, 0, 0, 0.5);
+    overflow: hidden;
+    width: 200px;
+    height: 98%;
+    transition: .5s ease;
+}
+
+.over-khac {
+    cursor: pointer;
+    position: absolute;
+    bottom: 5px;
+    left: 611px;
+    right: 0;
+    background-color: rgb(0, 0, 0, 0.5);
+    overflow: hidden;
+    width: 200px;
+    height: 98%;
+    transition: .5s ease;
+}
+
+
+/* Code ở trên tạo overplay hover*/
+
+.drinks:hover .over {
+    background-image: rgba(241, 237, 237, 0.5);
+    height: 0;
+}
+
+.drink {
+    font-size: 20px;
+    overflow: hidden;
+    position: absolute;
+    margin-top: 100px;
+    margin-left: 65px;
+    color: white;
+    font-family: monospace;
+    transition: .5s;
+}
+
+#menu-1 {
+    position: relative;
+    width: 500px;
+    height: 100px;
+    text-align: center;
+    margin-top: 800px;
+    margin-left: 480px;
+    border-top: 2px dashed rgb(80, 77, 68);
+    padding: 50px;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    text-decoration: underline;
+    font-size: 25px;
+}
+
+#menu-list,
+.drinks {
+    display: inline-block;
+}
+
+#xemmenu {
+    position: absolute;
+    top: 120%;
+    border: 1px solid;
+    outline-color: white;
+    padding: 4px;
+    text-align: center;
+    transform: translate(990%, 0);
+    background: black;
+    cursor: pointer;
+    font-family: sans-serif;
+    transition: .2s ease-in-out;
+}
+
+#xemmn {
+    color: white;
+}
+
+#xemmenu:hover {
+    text-decoration: underline;
+}
+
+footer {
+    position: absolute;
+    top: 170%;
+    box-shadow: 1px 0px 5px rgb(161, 161, 150);
+    width: 820px;
+    height: 400px;
+    left: 22.5%;
+}
+
+#phan-hoi {
+    position: absolute;
+    transform: translateX(13%);
+    color: red;
+    margin-top: 30px;
+    font-family: sans-serif;
+}
+
+.phanhoi,
+#ph-hoten,
+#ph-sdt,
+#ph-noidung,
+#phhoten,
+#phsdt,
+#phnoidung {
+    display: block;
+    margin: 2px;
+}
+
+.phanhoi {
+    margin-top: 80px;
+    margin-left: 30px;
+}
+
+#phhoten,
+#phsdt,
+#phnoidung {
+    width: 200px;
+    border: 0;
+    border: 1px solid white;
+    outline: none;
+    background: rgba(216, 216, 216, 0.925);
+    border-radius: 5px;
+}
+
+#phhoten,
+#phsdt,
+#phnoidung[type=text] {
+    padding: 0px 0px 0px 5px;
+}
+
+#phnoidung:focus {
+    background-color: rgb(221, 240, 140);
+}
+
+#phhoten:focus {
+    background-color: rgb(221, 240, 140);
+}
+
+#phsdt:focus {
+    background-color: rgb(221, 240, 140);
+}
+
+#phnoidung {
+    height: 80px;
+}
+
+#phhoten,
+#phsdt {
+    height: 40px;
+}
+
+#ph-hoten,
+#ph-sdt,
+#ph-noidung {
+    margin-top: 10px;
+}
+
+#btn-gui {
+    cursor: pointer;
+    width: 200px;
+    height: 30px;
+    margin: 10px 0 0 2px;
+    border: 1px solid;
+    background: rgb(241, 219, 12);
+    border-radius: 15px;
+    font-size: 15px;
+    font-family: monospace;
+}
+
+.fa-paper-plane {
+    margin-left: 5px;
+}
+
+#btn-gui:hover {
+    background: rgb(236, 240, 2);
+}
+
+#copy-right {
+    margin-top: 150px;
+    text-align: center;
+    border-top: 1px solid;
+    width: 1527px;
+    margin-left: -350px;
+    padding: 30px;
+    background-color: rgb(66, 66, 66);
+    color: white;
+    font-size: 20px;
+}
+
+#fbplugin {
+    position: absolute;
+    height: 315px;
+    width: 300px;
+    top: 40px;
+    left: 50%;
+    box-shadow: 1px 0px 5px rgb(161, 161, 150);
+    border: none;
+}
+
+#lendautrang {
+    text-align: center;
+    margin-top: 100px;
+}
+
+#len {
+    color: rgb(250, 0, 0);
+    font-size: 15px;
+}
+
+
+/*Giới thiệu*/
+
+
+/*Menu

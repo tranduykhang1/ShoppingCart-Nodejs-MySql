@@ -1,0 +1,225 @@
+    * {
+        margin: 0;
+        scroll-behavior: smooth;
+    }
+    
+    header {
+        top: 0;
+        position: fixed;
+        width: 100%;
+    }
+    
+    #title {
+        text-align: center;
+    }
+    
+    .nav-item {
+        margin: 10px;
+    }
+    
+    .table {
+        margin-top: 50px;
+    }
+    
+    .don_hang {
+        text-transform: uppercase;
+        margin-top: 100px;
+        text-align: center;
+        text-decoration: underline;
+    }
+    
+    thead th {
+        background: rgb(77, 77, 77);
+        color: white;
+    }
+    
+    tr:hover {
+        background: rgb(228, 228, 228);
+    }
+    
+    tbody th {
+        width: 20%;
+    }
+    
+    tbody .diachi {
+        width: 40%;
+    }
+    
+    tbody #noidung {
+        width: 60%;
+    }
+    
+    .btn {
+        margin: 2px;
+        color: white;
+    }
+    
+    .btn-primary {
+        margin-left: 48%;
+    }
+    
+    .card-outline-secondary {
+        position: absolute;
+        margin-left: 34%;
+        margin-top: 30px;
+        background: rgb(207, 207, 207);
+        width: 600px;
+        display: none;
+    }
+    
+    .thoat {
+        margin-left: 550px;
+        margin-top: -25%;
+    }
+    
+    #tbl_dathang {
+        position: absolute;
+        margin-left: 10px;
+        margin-top: 200px;
+        width: 700px;
+    }
+    
+    #tbl_cart {
+        font-size: 20px;
+        margin-top: -10px;
+        padding: 10px;
+    }
+    
+    #ad_giohang {
+        position: fixed;
+        margin-left: 800px;
+        margin-top: 200px;
+        background: rgb(241, 241, 241);
+        width: 650px;
+        box-shadow: 1px 1px 5px 2px rgb(141, 141, 141);
+    }
+    
+    .btn-light {
+        color: black;
+        margin-left: 40%;
+        background: rgb(201, 201, 201);
+    }
+    
+    .btn-primary {
+        margin-right: 15px;
+    }
+    
+    #dm_km {
+        display: flex;
+    }
+    
+    .btn-info {
+        margin-top: 20px;
+        margin-left: 48%;
+    }
+    
+    #btn_dm {
+        margin-left: 26%;
+    }
+    
+    #danhmuc-tk {
+        position: fixed;
+        right: 0;
+        top: 40%;
+        opacity: 1;
+    }
+    
+    #danhmuc-tk ul a {
+        color: black;
+        text-decoration: none;
+        display: block;
+        background: rgb(226, 226, 226);
+        padding: 10px;
+    }
+    
+    #danhmuc-tk ul a:hover {
+        background: rgb(212, 212, 212);
+    }
+    
+    #dautrang a {
+        font-size: 30px;
+        text-decoration: none;
+        color: black;
+        position: fixed;
+        right: 10px;
+        top: 90%;
+        background: green;
+        height: 40px;
+        padding: 5px;
+    }
+    
+    #dautrang {
+        visibility: hidden;
+        transition: .2s;
+        animation-name: dautrang 2s;
+    }
+    
+    @keyframes dautrang {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+    
+    .them_ {
+        position: absolute;
+        background: rgb(155, 155, 155);
+        width: 450px;
+        margin-left: 34%;
+        margin-top: -25%;
+        display: none;
+    }
+    
+    #them {
+        text-decoration: none;
+        font-size: 25px;
+        color: rgb(243, 109, 0);
+        text-align: center;
+        margin-left: 10px;
+        transition: .5s;
+    }
+    
+    #them:hover {
+        color: black;
+    }
+    
+    #tbl_dm,
+    #tbl_km {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    
+    #ngay {
+        font-size: 15px;
+    }
+    
+    #shd {
+        color: black;
+        font-size: 15px;
+    }
+    
+    #sohoadon {
+        font-size: 16px;
+        text-decoration-line: underline;
+        text-decoration-style: solid;
+    }
+    
+    .fa-caret-down {
+        padding: 1px;
+        color: black;
+    }
+    
+    #morong:hover .fa-caret-down {
+        color: white;
+    }
+    
+    #input_id {
+        left: 41%;
+    }
+    
+    #tbl_ctdh {
+        margin-top: -10px;
+    }

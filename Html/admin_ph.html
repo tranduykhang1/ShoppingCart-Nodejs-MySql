@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/Css/admin.css">
+    <script src="/JS/adminjs.js"></script>
+    <title>Admin</title>
+</head>
+
+<body>
+    <header id="header">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+            <div class="container">
+                <h1 id="title" class="navbar-brand">ORIGINAL COFFEE <br/>Admin</h1>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/adminpage">THỨC UỐNG</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/donhang">ĐƠN HÀNG
+                                </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/dathang">ĐẶT HÀNG
+                                </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/khachhang">KHÁCH HÀNG</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/admin/phanhoi">PHẢN HỒI</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/admin/thongke">THỐNG KÊ
+                                </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/dm_km">DM - KM
+                                        </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <h5 class="don_hang">Phản hồi của khách hàng</h5>
+    <table id="tbl_phanhoi" class="table">
+        <thead>
+            <tr>
+                <th scope="col">Tên khách hàng</th>
+                <th scope="col">Nội dung</th>
+                <th scope="col">Thời gian</th>
+            </tr>
+        </thead>
+    </table>
+    <script>
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                let data = JSON.parse(this.responseText);
+                var kq = "";
+                data.forEach((ph => {
+                    kq +=
+                        '  <tbody>' +
+                        ' <tr>' +
+                        ' <th scope="row">' + ph.tenKH_phanhoi + '</th>' +
+                        ' <td id="noidung">' + ph.noidung_phanhoi + '</td>' +
+                        ' <td>' + ph.thoigian_phanhoi + '</td>' +
+                        ' </tr>' +
+                        '  </tbody>';
+                }));
+                document.getElementById('tbl_phanhoi').innerHTML += kq;
+            };
+        };
+        xhttp.open("GET", "/admin/ph", false);
+        xhttp.send();
+    </script>
+
+</body>
+
+</html>

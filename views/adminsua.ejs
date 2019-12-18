@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Admin</title>
+</head>
+
+<body>
+
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script src="/JS/adminjs.js"></script>
+        <title>Admin</title>
+    </head>
+    <style>
+        #title {
+            text-align: center;
+        }
+        
+        h2 {
+            text-align: center;
+        }
+        
+        * {
+            margin: 0px;
+        }
+        
+        .btn-primary {
+            margin-left: 7%;
+            width: 100px;
+        }
+        
+        .btn-danger {
+            margin-left: 25%;
+            width: 100px;
+        }
+        
+        #form {
+            width: 500px;
+        }
+        
+        #huy {
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+
+
+    <body>
+        <header id="header">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+                <div class="container">
+                    <h1 id="title" class="navbar-brand">ORIGINAL COFFEE <br/>Admin</h1>
+                    <div class="collapse navbar-collapse" id="navbarResponsive">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/adminpage">THỨC UỐNG</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/admin/donhang">ĐƠN HÀNG
+                                    </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/admin/dathang">ĐẶT HÀNG
+                                    </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/admin/khachhang">KHÁCH HÀNG</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/admin/phanhoi">PHẢN HỒI</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/admin/thongke">THỐNG KÊ
+                                    </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/admin/dm_km">DM - KM
+                                            </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+
+        <div id="form" class="container">
+            <h2>Cập nhật thức uống</h2>
+            <form method="post" action="/admin/sua/<%=data[0].id_thucuong%>">
+
+
+                <input class="form-control" type="hidden" value="<%=data[0].id_thucuong%>" name="s_id" />
+
+                <div class="form-group" id="ten">
+                    <label for="email">Tên thức uống</label>
+                    <input class="form-control" type="text" value="<%=data[0].ten_thucuong%>" name="s_tentu" />
+                </div>
+                <div class="form-group" id="madm">
+                    <label for="pwd">Mã danh mục</label>
+                    <input class="form-control" type="text" value="<%=data[0].id_danhmuc%>" name="s_madm" />
+                </div>
+                <div class="form-group" id="makm">
+                    <label for="pwd">Mã khuyến mãi</label>
+                    <input class="form-control" type="text" value="<%=data[0].id_khuyenmai%>" name="s_makm" />
+                </div>
+                <div class="form-group" id="anh">
+                    <label for="pwd">Ảnh thức uống</label>
+                    <input class="form-control" type="text" value="<%=data[0].anh_thucuong%>" name="s_anhtu" />
+                </div>
+                <div class="form-group" id="gia">
+                    <label for="pwd">Giá thức uống</label>
+                    <input class="form-control" type="text" value="<%=data[0].gia_thucuong%>" name="s_giatu" />
+                </div>
+                <div class="form-group" id="ghichu">
+                    <label for="pwd">Ghi chú thức uống</label>
+                    <input class="form-control" type="text" value="<%=data[0].ghichu_thucuong%>" name="s_ghichu" />
+                </div>
+
+                <button type="submit" class="btn btn-danger"> <a id="huy"href="/adminpage">Huỷ</a></button>
+                <button type="submit" class="btn btn-primary">Cập nhật</button>
+            </form>
+        </div>
+
+
+
+    </body>
+
+    <!-- <script>
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            var thucuong = JSON.parse(this.responseText);
+
+            let ten = document.getElementById('ten');
+            let madm = document.getElementById('madm');
+            let makm = document.getElementById('makm');
+            let anh = document.getElementById('anh');
+            let gia = document.getElementById('ten');
+            let ghichu = document.getElementById('ten');
+
+            ten.innerHTML += '<input type="text" class="form-control" value="' + thucuong.ten_thucuong + '" name="s_ten">';
+            madm.innerHTML += '<input type="text" class="form-control" value="' + thucuong.id_danhmuc + '" name="s_madm">';
+            makm.innerHTML += '<input type="text" class="form-control" value="' + thucuong.id_thucuong + '" name="s_makm">';
+            anh.innerHTML += '<input type="text" class="form-control" value="' + thucuong.anh_thucuong + '" name="s_anhtu">';
+            gia.innerHTML += '<input type="text" class="form-control" value="' + thucuong.gia_thucuong + '" name="s_giatu">';
+            ghichu.innerHTML += '<input type="text" class="form-control" value="' + thucuong.ghichu_thucuong + '" name="s_ghichu">';
+        }
+        xhttp.open("GET", "/admin/sua/" + id_thucuong, true);
+        xhttp.send();
+    </script> -->
+
+</html>

@@ -1,0 +1,223 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/Css/admin.css">
+    <script src="https://kit.fontawesome.com/32b2689684.js"></script>
+    <title>Admin</title>
+</head>
+
+<body>
+    <header style="position: absolute;">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+            <div class="container">
+                <h1 id="title" class="navbar-brand">ORIGINAL COFFEE <br/>Admin</h1>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/adminpage">THỨC UỐNG</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/donhang">ĐƠN HÀNG
+                                </a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/admin/dathang">ĐẶT HÀNG
+                                </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/khachhang">KHÁCH HÀNG</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/phanhoi">PHẢN HỒI</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/thongke">THỐNG KÊ
+                                </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/dm_km">DM - KM
+                                    </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="modal fade" id="thanhtoan" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title" id="exampleModalLongTitle">ORIGINAL COFFEE</h6>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <form method='post' action='/admin/themdonhang'>
+                        <h5 style="text-align: center;" class="modal-title">HÓA ĐƠN THANH TOÁN</5>
+                            <p id="ngay"></p>
+                            <p id="shd">Số hóa đơn: <span id="sohoadon" onchange="sohoadon()"></span></p>
+                            <table class="table" id="hoa_don">
+                                <thead>
+                                    <tr>
+                                        <td width="40%">Tên thức uống</td>
+                                        <td width="30%">Số lượng</td>
+                                        <td width="40%">Giá</td>
+                                    </tr>
+                                </thead>
+                            </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">In</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table" id="tbl_dathang">
+            <thead>
+                <tr>
+                    <th width="20%" scope="col">Mã Thức Uống</th>
+                    <th width="50%" scope="col">Tên Thức Uống</th>
+                    <th width="40%" scope="col">Giá</th>
+                    <th width="20%" scope="col">Thêm</th>
+                </tr>
+            </thead>
+            <script>
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        let data = JSON.parse(this.responseText);
+                        var kq = "";
+                        data.forEach(function(dh) {
+                            kq +=
+                                '  <tbody>' +
+                                ' <tr>' +
+                                ' <td scope="row">' + dh.id_thucuong + '</td>' +
+                                ' <th>' + dh.ten_thucuong + '</th>' +
+                                ' <td>' + dh.gia_thucuong + ' VND</td>' +
+                                ' <td><a title="Thêm" id="them" href="/admin/them/' + dh.id_thucuong + '">+</a></td>' +
+                                '  </tbody>';
+                        })
+                        document.getElementById('tbl_dathang').innerHTML += kq;
+                    };
+                };
+                xhttp.open("GET", "/admin/ord", true);
+                xhttp.send();
+            </script>
+
+        </table>
+    </div>
+
+    <div id="ad_giohang">
+        <h4 style="text-align: center; border-bottom: 1px solid;padding: 5px;">THANH TOÁN TRỰC TIẾP</h4>
+        <table class="table" id="tbl_cart">
+            <thead>
+                <tr>
+                    <td width="40%">Tên thức uống</td>
+                    <td width="30%">Số lượng</td>
+                    <td width="40%">Giá</td>
+                </tr>
+            </thead>
+        </table>
+        <button type="button" class="btn btn-light" data-toggle="modal" data-target="#thanhtoan">THANH TOÁN</button>
+    </div>
+
+
+</body>
+
+<script>
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var data = JSON.parse(this.responseText);
+            var spham = "";
+            var hoadon = "";
+            const today = new Date();
+            var date = today.getDate() + '/' + (today.getMonth() + 1) + '/' + +today.getFullYear();
+            var tong = 0;
+            data.forEach(sp => {
+                let tonggia = sp.soluong * sp.gia;
+                tong += tonggia;
+                spham += '<tbody>' +
+                    '<tr>' +
+                    '<td width="40%">' + sp.ten + '</td>' +
+                    '<td width="10%">x' + sp.soluong + '</td>' +
+                    '<th width="50%">' + sp.gia + ' VND</th>' +
+                    ' </tr>' +
+                    '</tbody>';
+
+                hoadon += '<tbody>' +
+                    '<tr>' +
+                    '<td width="40%">' + sp.ten + '</td>' +
+                    '<td width="10%">x' + sp.soluong + '</td>' +
+                    '<th width="30%">' + sp.gia + ' VND</th>' +
+                    ' </tr>' +
+                    '<br/>' +
+                    '</tbody>';
+            })
+            document.getElementById('tbl_cart').innerHTML += spham;
+            document.getElementById('hoa_don').innerHTML += hoadon;
+            document.getElementById('hoa_don').innerHTML += '<tr>' +
+                '<td style="font-size: 22px; color: red;">TỔNG:  </td>' +
+                '<td> </td>' +
+                '<td style="font-size: 18px;color: red">' + tong + ' VND</td>' +
+                '<td ></td>' +
+                '</tr>';
+            document.getElementById('ngay').innerHTML += date;
+        }
+    }
+    xhttp.open("GET", "/soluong", false);
+    xhttp.send();
+
+
+    function sohoadon() {
+        var sohd = document.getElementById('sohoadon');
+        if (sohd.length === 0) {
+            sohd.innerHTML = 0;
+        }
+    }
+
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            let sohoadon = JSON.parse(this.responseText);
+            sohoadon.forEach(c => {
+                c.ma_hdtt += 1;
+                document.getElementById('sohoadon').innerHTML += c.ma_hdtt;
+            })
+        }
+    }
+    xhttp.open("GET", "/admin/sohoadon", false);
+    xhttp.send();
+
+
+
+    // xhttp.onreadystatechange = function() {
+    //     if (this.readyState == 4 && this.status == 200) {
+    //         var data = JSON.parse(this.responseText);
+    //         var spham = "";
+
+    //         data.forEach(sp => {
+    //             spham += '<tbody>' +
+    //                 '<tr>' +
+    //                 '<td width="40%">' + sp.ten + '</td>' +
+    //                 '<td width="10%">x' + sp.soluong + '</td>' +
+    //                 '<th width="50%">' + sp.gia + ' VND</th>' +
+    //                 ' </tr>' +
+    //                 '</tbody>';
+    //         })
+    //         document.getElementById('tbl_cart').innerHTML += spham;
+    //     }
+    // }
+    // xhttp.open("GET", "/", false);
+    // xhttp.send();
+</script>
+
+</html>

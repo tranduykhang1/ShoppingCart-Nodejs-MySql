@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/Css/admin.css">
+    <script src="/JS/adminjs.js"></script>
+    <title>Admin</title>
+</head>
+
+<body>
+    <header id="header">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+            <div class="container">
+                <h1 id="title" class="navbar-brand">ORIGINAL COFFEE <br/>Admin</h1>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/adminpage">THỨC UỐNG</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/donhang">ĐƠN HÀNG
+                                </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/dathang">ĐẶT HÀNG
+                                </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/khachhang">KHÁCH HÀNG</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/phanhoi">PHẢN HỒI</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/thongke">THỐNG KÊ
+                                </a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/admin/danhmuc" title="Danh mục-Khuyến mãi">DM - KM
+                                    </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <h3 class="don_hang">DANH MỤC - KHUYẾN MÃI</h3>
+    <div id="dm_km">
+        <div class="table-responsive">
+            <table class="table w-auto" id="tbl_dm">
+                <thead>
+                    <tr>
+                        <th width="30%" scope="col">Mã Danh Mục</th>
+                        <th width="50%" scope="col">Tên Danh Mục</th>
+                    </tr>
+                </thead>
+                <!--Get method-->
+            </table>
+            <button id="btn_dm" type="button" class="btn btn-info" onclick="danhmuc()">Thêm</button>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table w-auto" id="tbl_km">
+                <thead>
+                    <tr>
+
+                    </tr>
+                    <th width="20%" scope="col">Mã khuyến mãi</th>
+                    <th width="20%" scope="col">Loại khuyến mãi</th>
+                    <th width="50%" scope="col">Áp dụng</th>
+                    </tr>
+                </thead>
+                <script>
+                    var xhttp = new XMLHttpRequest()
+                    xhttp.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                            var khuyenmai = JSON.parse(this.responseText);
+                            let kqkm = "";
+                            khuyenmai.forEach(km => {
+                                kqkm += '<tbody>' +
+                                    '<tr>' +
+                                    '<td>' + km.id_khuyenmai + '</td>' +
+                                    '<th>' + km.gia_khuyenmai + '</th>' +
+                                    '<th>' + km.apdung + '</th>' +
+                                    '</tr>' +
+                                    '</tbody>';
+                            });
+                            document.getElementById('tbl_km').innerHTML += kqkm;
+                        }
+                    }
+                    xhttp.open("GET", "/admin/khuyenmai", false);
+                    xhttp.send();
+                </script>
+            </table>
+            <button id="btn_km" type="button" class="btn btn-info" onclick="khuyenmai()">Thêm</button>
+        </div>
+    </div>
+
+    <div class="them_" id="them_dm">
+        <div class="card-header">
+            <h3 class="mb-0">Thêm danh mục</h3>
+        </div>
+        <div class="card-body">
+            <form class="form" role="form" autocomplete="off" method="post" action="/admin/themdm">
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Mã DM</label>
+                    <div class="col-lg-9">
+                        <input class="form-control" type="text" name="madm">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Tên DM</label>
+                    <div class="col-lg-9">
+                        <input class="form-control" type="text" name="tendm">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label"></label>
+                    <div class="col-sm-4">
+                        <button type="button" class="btn btn-primary" onclick="dong()">Huỷ</button>
+                    </div>
+                    <div class="col-sm-0">
+                        <button type="submit" class=" btn btn-primary">Thêm</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!---->
+    </div>
+    <div class="them_" id="them_km">
+        <div class="card-header">
+            <h3 class="mb-0">Thêm khuyến mãi</h3>
+        </div>
+        <div class="card-body">
+            <form class="form" role="form" autocomplete="off" method="post" action="/admin/themkm">
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Mã KM</label>
+                    <div class="col-lg-9">
+                        <input class="form-control" type="text" name="makm">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Loại KM</label>
+                    <div class="col-lg-9">
+                        <input class="form-control" type="text" name="loaikm">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Áp dụng</label>
+                    <div class="col-lg-9">
+                        <input class="form-control" type="text" name="km_apdung">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label"></label>
+                    <div class="col-sm-4">
+                        <button type="button" class="btn btn-primary" onclick="dong()">Huỷ</button>
+                    </div>
+                    <div class="col-sm-0">
+                        <button type="submit" class=" btn btn-primary">Thêm</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!---->
+    </div>
+
+
+</body>
+
+
+<script>
+    var xhttp = new XMLHttpRequest();
+    var method = "GET";
+
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var danhmuc = JSON.parse(this.responseText);
+            let kq = "";
+            danhmuc.forEach(dm => {
+                kq += '<tbody>' +
+                    '<tr>' +
+                    '<td>' + dm.id_danhmuc + '</td>' +
+                    '<th>' + dm.ten_danhmuc + '</th>' +
+                    '</tr>' +
+                    '</tbody>';
+            });
+            document.getElementById('tbl_dm').innerHTML += kq;
+        }
+    }
+    xhttp.open(method, "/admin/danhmuc", false);
+    xhttp.send();
+
+    //khuyen mai
+</script>
+
+</html>

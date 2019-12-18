@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/Css/admin.css">
+    <script src="https://kit.fontawesome.com/32b2689684.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="/JS/adminjs.js"></script>
+
+    <title>Admin</title>
+</head>
+
+<body>
+    <h3 id="dau"></h3>
+    <header id="header">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+            <div class="container">
+                <h1 id="title" class="navbar-brand">ORIGINAL COFFEE <br/>Admin</h1>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/adminpage">THỨC UỐNG</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/admin/donhang">ĐƠN HÀNG
+                                </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/dathang">ĐẶT HÀNG
+                                </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/khachhang">KHÁCH HÀNG</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/phanhoi">PHẢN HỒI</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/thongke">THỐNG KÊ
+                                </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/dm_km">DM - KM
+                                        </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div>
+
+        <h5 class="don_hang">Thông tin đơn hàng </h5>
+        <table id="tbl_donhang" class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Mã đơn hàng</th>
+                    <th scope="col">Tên khách hàng</th>
+                    <th scope="col">Ngày lập</th>
+                    <th scope="col">Tổng giá</th>
+                    <th scope="col">Giá Khuyễn mãi</th>
+                    <th scope="col">Trạng thái</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <script>
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                let data = JSON.parse(this.responseText);
+                var kq = "";
+                var tonggia_km = 0;
+                data.forEach(dh => {
+                    var trangthai = dh.trangthai_donhang;
+                    tonggia_km += dh.tonggia_donhang * 0.75;
+                    kq +=
+                        '  <tbody>' +
+                        ' <tr data-toggle="modal" data-target="#ctdh_tbl" onclick= ctdh("' + dh.id_donhang + '") style=" cursor: pointer;">' +
+                        ' <th scope="row">' + dh.id_donhang + '</th>' +
+                        ' <td>' + dh.hoten_khachhang + '</td>' +
+                        ' <td>' + dh.ngaylap_donhang + '</td>' +
+                        ' <td>' + dh.tonggia_donhang + ' VNĐ</td>' +
+                        ' <td style="text-transform: initial;">' + tonggia_km + ' VNĐ</td>' +
+                        ' <td>' + trangthai + '</td>' +
+                        ' <td><a href="/xacnhandon/' + dh.id_donhang + '" onmouseover="danhan("' + trangthai + '")"><button  id="xacnhan"  class="btn btn-primary">Nhận</button></a></td>' +
+                        ' </tr>' +
+                        '  </tbody>';
+                    tonggia_km = 0;
+                })
+                document.getElementById('tbl_donhang').innerHTML += kq;
+            };
+        };
+        xhttp.open("GET", "/admin/dh", true);
+        xhttp.send();
+    </script>
+
+    <div class="modal fade" id="ctdh_tbl" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div id="header_madon" class="modal-header">
+
+                </div>
+                <div id="ctdh_data" class="modal-body">
+                    <table id="tbl_ctdh" class="table" width=ml-auto>
+                        <thead>
+                            <tr>
+                                <th scope="col">Mã CT đơn</th>
+                                <th scope="col">Tên thức uống</th>
+                                <th scope="col">Số lượng</th>
+                                <th scope="col">Giá</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ctdh_body">
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        function ctdh(id) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    let data = JSON.parse(this.responseText);
+                    var kq = "";
+                    data.forEach(dt => {
+                        kq +=
+                            '<tr>' +
+                            '<td>' + dt.id_ctdonhang + '</td>' +
+                            '<td>' + dt.ten_thucuong + '</td>' +
+                            '<td>' + dt.so_luong + '</td>' +
+                            '<td >' + dt.dongia_chitiet + ' VNĐ</td>';
+                        '</tr>';
+                        document.getElementById('header_madon').innerHTML = '<h5 class="modal-title">Chi tiết đơn hàng số: ' + dt.id_donhang + '</h5>';
+                    });
+                    document.getElementById('ctdh_body').innerHTML = kq;
+
+                }
+            };
+            xhttp.open("GET", "/admin/ctdh/" + id, true);
+            xhttp.send();
+        }
+    </script>
+
+
+
+    <!-- Thông tin đơn hàng trực tiếp -->
+    <h5 class="don_hang">Thông tin đơn hàng trực tiếp</h5>
+    <table id="tbl_hoadon" class="table">
+        <thead>
+            <tr>
+                <th scope="col">Mã đơn hàng</th>
+                <th scope="col">Ngày lập</th>
+                <th scope="col">Tổng giá</th>
+                <th scope="col">Trạng thái</th>
+            </tr>
+            <tbody id="dhtt_body">
+
+            </tbody>
+        </thead>
+    </table>
+
+
+    <script>
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                let data = JSON.parse(this.responseText);
+                var kq = "";
+                data.forEach(dt => {
+                    kq += '<tr data-toggle="modal" data-target="#ctdhtt_tbl" onclick= ctdhtt("' + dt.ma_hdtt + '") style=" cursor: pointer;">' +
+                        '<th>' + dt.ma_hdtt + '</th>' +
+                        '<td>' + dt.ngay_hdtt + '</td>' +
+                        '<td>' + dt.tonggia_hdtt + ' VNĐ</td>' +
+                        '<td >' + dt.trangthai_hdtt + ' </td>';
+                    '</tr>';
+                });
+                document.getElementById('dhtt_body').innerHTML = kq;
+
+            }
+        };
+        xhttp.open("GET", "/admin/donhangtructiep", true);
+        xhttp.send();
+    </script>
+
+    <div class="modal fade" id="ctdhtt_tbl" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div id="header_madontt" class="modal-header">
+
+                </div>
+                <div id="ctdh_data" class="modal-body">
+                    <table id="tbl_ctdh" class="table" width=ml-auto>
+                        <thead>
+                            <tr>
+                                <th scope="col">Mã CT đơn</th>
+                                <th scope="col">Tên thức uống</th>
+                                <th scope="col">Số lượng</th>
+                                <th scope="col">Giá</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cthdtt_body">
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function ctdhtt(id) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    let data = JSON.parse(this.responseText);
+                    var kq = "";
+                    data.forEach(dt => {
+                        kq +=
+                            '<tr>' +
+                            '<td>' + dt.ma_cthdtt + '</td>' +
+                            '<td>' + dt.ten_thucuong + '</td>' +
+                            '<td>' + dt.soluong_tt + '</td>' +
+                            '<td>' + dt.dongia_tt + ' VNĐ</td>';
+                        '</tr>';
+                        document.getElementById('header_madontt').innerHTML = '<h5 class="modal-title">Chi tiết hóa đơn số: ' + dt.ma_hdtt + '</h5>';
+                    });
+                    document.getElementById('cthdtt_body').innerHTML = kq;
+
+                }
+            };
+            xhttp.open("GET", "/admin/ctdhtt/" + id, true);
+            xhttp.send();
+        }
+    </script>
+
+    <div id="dautrang">
+        <a href="#" title="Đầu trang">^</a>
+    </div>
+
+
+
+</body>
+<script>
+    function danhan(trangthai) {
+        let stt = "Đã nhận";
+        var n = trangthai.localeCompare(stt);
+        console.log(n);
+    };
+</script>
+
+</html>

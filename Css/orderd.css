@@ -1,0 +1,137 @@
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: linear-gradient( to bottom, white, rgb(250, 237, 237));
+    background-attachment: fixed;
+    height: auto;
+}
+
+html {
+    height: 100%;
+    scroll-behavior: smooth;
+}
+
+header {
+    top: 0;
+    background: #DCDCD8;
+    height: 80px;
+    padding: 20px;
+}
+
+span {
+    color: black;
+}
+
+#title {
+    color: #CD5507;
+    margin-top: 0px;
+    margin-left: 15px;
+    font-size: 40px;
+    font-family: fantasy;
+    border-bottom: 4px solid;
+    padding-left: 25px;
+    padding-bottom: 5px;
+    width: 350px;
+    transition: 1s ease-in-out;
+}
+
+.nav-bar {
+    width: 100%;
+    z-index: 1;
+    transition: 1s;
+}
+
+ul {
+    float: right;
+    margin-right: 50px;
+    margin-top: -40px;
+}
+
+ul a {
+    color: black;
+    font-size: 14px;
+    transition: 0.3s ease-in-out;
+    padding: 0px 0px 21px 0px;
+    margin: 17px;
+    font-family: Verdana;
+    white-space: nowrap;
+}
+
+.active,
+ul a:hover {
+    color: #CD5507;
+    border-bottom: 3px solid;
+}
+
+#dhcb {
+    text-align: center;
+    color: #CD5507;
+    margin-top: 5%;
+    font-size: 25px;
+}
+
+#tk_donhang {
+    margin-top: 5%;
+    margin-left: 38.5%;
+}
+
+#timkiem {
+    background: transparent;
+    border: 0px;
+    border-bottom: 1px solid;
+    outline: none;
+    width: 350px;
+    height: 30px;
+}
+
+#btn_tkdh {
+    height: 30px;
+    width: 40px;
+    background: transparent;
+    border: none;
+    margin-left: -34px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+#btn_tkdh:hover {
+    color: #CD5507;
+}
+
+input[type=text] {
+    padding: 5px;
+}
+
+table {
+    text-align: center;
+    margin-top: 35px;
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td,
+th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    background: rgb(66, 66, 66);
+    color: white;
+    padding: 10px;
+    width: 100%;
+}

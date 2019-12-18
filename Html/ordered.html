@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Original Coffee</title>
+    <link rel='stylesheet' href="/Css/orderd.css" media="screen" />
+    <script src="https://kit.fontawesome.com/32b2689684.js"></script>
+</head>
+
+<body>
+    <header class="nav-bar" id="nav">
+        <a href="home">
+            <h1 id="title">ORIGINAL <span>COFFEE</span></h1>
+        </a>
+        <ul id='links'>
+            <a href="/menu">MENU</a>
+            <a href="/order">MUA NGAY</a>
+            <a href="/confirmOrd">GIỎ HÀNG</a>
+            <a class="active"> ĐƠN HÀNG</a>
+        </ul>
+    </header>
+
+    <h3 id="dhcb">XEM ĐƠN HÀNG CỦA BẠN</h3>
+    <form id="tk_donhang">
+        <h4 style="margin-bottom: 5px ;">Tìm kiếm đơn hàng:</h5>
+            <input id="timkiem" type="text" placeholder="Nhập số điện thoại để tìm..." name="sodienthoai" onkeyup="xemdon(this.value)">
+            <button type="submit" id="btn_tkdh" title="Tim kiem">
+        <i id="icon-search" class="fas fa-search"></i>
+    </button>
+    </form>
+    <table id="tt_don">
+        <tr class="thead">
+            <th>Số hoá đơn</th>
+            <th>Tên người nhận</th>
+            <th>Ngày đặt</th>
+            <th>Địa chỉ nhận</th>
+            <th>Tổng thanh toán</th>
+            <th>Trạng thái</th>
+        </tr>
+
+    </table>
+
+
+    <footer>
+        <h6 id="title_ft">Đồ án Kỹ Thuật Phần Mềm 1</h6>
+        <h6 id="ten_ft">Trần Duy Khang || Nguyễn Minh Luân</h6>
+    </footer>
+</body>
+
+<script>
+    function xemdon(sdt) {
+        if (sdt == "") {
+            document.getElementById('ketqua').innerHTML = " ";
+        }
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                let data = JSON.parse(this.responseText);
+                let km = 0;
+                data.forEach(dt => {
+                    let kmai = dt.tonggia_donhang * 0.75;
+                    km += kmai;
+                    document.getElementById('tt_don').innerHTML += '<tr id="ketqua">' +
+                        '<td>' + dt.id_donhang + '</td>' +
+                        '<td>' + dt.hoten_khachhang + '</td>' +
+                        '<td>' + dt.ngaylap_donhang + '</td>' +
+                        '<td>' + dt.diachi_khachhang + '</td>' +
+                        '<td>' + km + ' VNĐ</td>' +
+                        '<td>' + dt.trangthai_donhang + '</td>' +
+                        '</tr>';
+                })
+            }
+        };
+        xhttp.open("GET", "/xemdonhang/" + sdt, true);
+        xhttp.send();
+    }
+</script>
+
+</html>

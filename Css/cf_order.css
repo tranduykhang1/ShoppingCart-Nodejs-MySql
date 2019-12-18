@@ -1,0 +1,278 @@
+* {
+    text-decoration: none;
+    margin: 0;
+}
+
+html {
+    height: 100%;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-image: linear-gradient( to bottom, white, rgb(250, 237, 237));
+    background-attachment: fixed;
+    height: 100%;
+}
+
+span {
+    color: black;
+}
+
+sub {
+    font-size: 30px;
+}
+
+header {
+    width: 500px;
+    height: 70px;
+    width: 100%;
+    margin-left: 0;
+}
+
+#title a {
+    color: #CD5507;
+    margin-top: 0px;
+    margin-left: 15px;
+    font-size: 40px;
+    font-family: fantasy;
+    padding-left: 25px;
+    border-bottom: 3px solid;
+    padding: 10px;
+    width: 450px;
+}
+
+ul {
+    float: right;
+    margin-right: 50px;
+    margin-top: -40px;
+}
+
+ul a {
+    color: black;
+    font-size: 14px;
+    transition: 0.3s ease-in-out;
+    padding: 0px 0px 21px 0px;
+    margin: 17px;
+    font-family: Verdana;
+    white-space: nowrap;
+}
+
+.active,
+ul a:hover {
+    color: #CD5507;
+    border-bottom: 3px solid;
+}
+
+#order-title {
+    text-align: center;
+}
+
+#xacnhan {
+    text-align: center;
+    color: green;
+    font-size: 30px;
+    margin-top: 30px;
+}
+
+.fa-thumbs-up {
+    color: green;
+    margin-left: 10px;
+}
+
+#nhap_thongtin {
+    transform: translate( 30%, 10%);
+    background: rgb(250, 250, 250);
+    height: 510px;
+    width: 700px;
+    justify-items: center;
+    box-shadow: 1px 1px 5px rgb(170, 170, 170);
+}
+
+#note {
+    text-align: center;
+    border-bottom: 1px solid rgb(155, 153, 153);
+    padding: 20px;
+}
+
+#thongtin {
+    margin-top: 40px;
+    margin-left: 20px;
+}
+
+.thongtin {
+    margin-top: 20px;
+    width: 300px;
+    height: 20px;
+    border: 1px solid black;
+}
+
+.thongtin:focus {
+    outline-color: #CD5507;
+}
+
+.thongtin[type=text] {
+    padding: 10px;
+}
+
+#diachi,
+#ghichu {
+    width: 627px;
+}
+
+#thanhtoan {
+    text-align: center;
+    border-bottom: 1px solid rgb(155, 153, 153);
+    padding: 20px;
+}
+
+#tructiep {
+    text-align: center;
+    margin-top: 10px;
+}
+
+#btn_dathang {
+    margin-top: 50px;
+    margin-left: 3%;
+    border: 1px solid #CD5507;
+    width: 650px;
+    height: 40px;
+    outline: none;
+    cursor: pointer;
+    background: rgb(218, 95, 14);
+    color: white;
+    font-size: 15px;
+}
+
+#dat_hang {
+    margin-left: 750px;
+    margin-top: -490px;
+    background: rgb(250, 250, 250);
+    height: 510px;
+    width: 400px;
+    justify-items: center;
+    box-shadow: 1px 1px 5px rgb(170, 170, 170);
+}
+
+#tt_donhang {
+    border-bottom: 1px solid;
+    padding: 20px;
+    text-align: center;
+}
+
+#tt_don {
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #ddd;
+    font-size: 15px;
+    margin-top: 50px;
+    font-style: italic;
+}
+
+#tt_don th {
+    border-bottom: 1px solid black;
+    font-style: normal;
+    text-align: center;
+    padding: 15px;
+}
+
+.btn_capnhat {
+    outline: none;
+    cursor: pointer;
+    color: rgb(0, 0, 0);
+    font-size: 13px;
+    margin: 1px;
+    border: 0px solid;
+    background: rgb(212, 212, 212);
+    border-radius: 50%;
+    width: 20px;
+    height: 22px;
+    color: black;
+}
+
+.btn_capnhat a {
+    color: black;
+}
+
+.btn_capnhat:hover {
+    background: rgb(121, 121, 121);
+    color: white;
+}
+
+#tt_don td {
+    text-align: center;
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+#tt_don tr:hover {
+    background: rgb(228, 227, 227);
+}
+
+tr #tong_tr {
+    border-top: 1px solid;
+}
+
+#tong_gia {
+    text-align: center;
+    padding: 20px;
+    width: 100px;
+}
+
+#xac_nhan {
+    color: black;
+    border: none;
+    background: rgb(35, 253, 15);
+    padding: 10px;
+    border-radius: 5px;
+    transition: .4s;
+}
+
+#xac_nhan:hover {
+    background: rgb(17, 201, 0);
+    cursor: pointer;
+}
+
+#tt_km {
+    font-size: 20px;
+    border-bottom: 1px solid;
+    padding: 20px;
+    text-align: center;
+}
+
+#nd_km {
+    margin: 50px;
+}
+
+#ft {
+    position: absolute;
+    background: rgb(66, 66, 66);
+    color: white;
+    width: 1518px;
+    margin-left: -1000px;
+    bottom: -200px;
+    font-size: 20px;
+    text-align: center;
+    padding: 20px;
+}
+
+#km {
+    font-size: 14px;
+    text-align: center;
+    color: rgb(255, 166, 1);
+    margin: 3px;
+    cursor: pointer;
+    transition: .7s;
+    animation-name: km;
+    animation-iteration-count: infinite;
+    animation-duration: 2s;
+    animation-delay: 3s;
+}
+
+@keyframes km {
+    form {
+        color: rgb(255, 156, 75);
+    }
+    to {
+        color: blue;
+    }
+}

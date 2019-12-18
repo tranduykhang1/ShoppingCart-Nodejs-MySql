@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/Css/admin.css">
+    <script src="/JS/adminjs.js"></script>
+    <title>Admin</title>
+</head>
+<h1 id="dau"></h1>
+
+<body>
+    <header id="header">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+            <div class="container">
+                <h1 id="title" class="navbar-brand">ORIGINAL COFFEE <br/>Admin</h1>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/adminpage">THỨC UỐNG</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/donhang">ĐƠN HÀNG
+                                        </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/dathang">ĐẶT HÀNG
+                                        </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/khachhang">KHÁCH HÀNG</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/phanhoi">PHẢN HỒI</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/admin/thongke">THỐNG KÊ
+                                        </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/dm_km">DM - KM
+                                        </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+    <div id="danhmuc-tk">
+        <ul>
+            <a href="#tbl_ngay">Ngày</a>
+            <a href="#tbl_thucuong">Thức uống</a>
+            <a href="#tbl_ten">Khách hàng</a>
+        </ul>
+    </div>
+
+    <div class="table-responsive">
+        <h3 class="don_hang">THỐNG KÊ THEO NGÀY</h3>
+        <table class="table " id="tbl_ngay">
+            <thead>
+                <tr>
+                    <th width="10%" scope="col">Ngày</th>
+                    <th width="50%" scope="col">Số đơn hàng</th>
+                    <th width="40%" scope="col">Tổng</th>
+                </tr>
+            </thead>
+            <script>
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        let data = JSON.parse(this.responseText);
+                        var kq = "";
+                        data.forEach(function(tk) {
+                            kq +=
+                                '  <tbody>' +
+                                ' <tr>' +
+                                ' <th scope="row">' + tk.ngaylap_donhang + '</th>' +
+                                ' <td>' + tk.sodonhang + '</td>' +
+                                ' <td>' + tk.tonggia + ' VND</td>' +
+                                '</tr>' +
+                                '  </tbody>';
+                        })
+                        document.getElementById('tbl_ngay').innerHTML += kq;
+                    };
+                };
+                xhttp.open("GET", "/admin/xuattk_ngay", false);
+                xhttp.send();
+            </script>
+        </table>
+    </div>
+
+    <div class="table-responsive">
+        <h3 class="don_hang">THỐNG KÊ THEO THỨC UỐNG</h3>
+        <table class="table" id="tbl_thucuong">
+            <thead>
+                <tr>
+                    <th width="10%" scope="col">Tên thức uống</th>
+                    <th width="20%" scope="col">Ngày bán</th>
+                    <th width="30%" scope="col">Giá thức uống</th>
+                    <th width="40%" scope="col">Số lượng bán (ly)</th>
+                </tr>
+            </thead>
+            <script>
+                xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        let data = JSON.parse(this.responseText);
+                        var kq = "";
+                        data.forEach(function(thucuong) {
+                            kq +=
+                                '  <tbody>' +
+                                ' <tr>' +
+                                ' <th scope="row">' + thucuong.ten_thucuong + '</th>' +
+                                ' <td>' + thucuong.ngaylap_donhang + '</td>' +
+                                ' <td>' + thucuong.dongia_chitiet + ' VND</td>' +
+                                '<td>' + thucuong.soluong + '</td>' +
+                                '</tr>' +
+                                '  </tbody>';
+                        })
+                        document.getElementById('tbl_thucuong').innerHTML += kq;
+                    };
+                };
+                xhttp.open("GET", "/admin/xuattk_tuong", false);
+                xhttp.send();
+            </script>
+
+
+        </table>
+    </div>
+
+    <div class="table-responsive">
+        <h3 class="don_hang">THỐNG KÊ THEO KHÁCH HÀNG</h3>
+        <table class="table" id="tbl_ten">
+            <thead>
+                <tr>
+                    <th width="10%" scope="col">Tên khách hàng</th>
+                    <!-- <th width="20%" scope="col">Ngày mua</th> -->
+                    <th width="10%" scope="col">Số lần mua</th>
+                    <th width="20%" scope="col" title="Đã mua trên 2 đơn hàng">Khách quen</th>
+                </tr>
+            </thead>
+            <script>
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        let data = JSON.parse(this.responseText);
+                        var kq = "";
+                        let khachquen = "";
+                        data.forEach((tenkh) => {
+
+                            if (tenkh.sodon >= 2) {
+                                khachquen = '<h6>✔</h6>';
+                            } else {
+                                khachquen = "";
+                            }
+                            kq +=
+                                '  <tbody>' +
+                                ' <tr>' +
+                                ' <th scope="row">' + tenkh.hoten_khachhang + '</th>' +
+                                // ' <td>' + tenkh.ngaylap_donhang + '</td>' +
+                                '<td >' + tenkh.sodon + '</td>' +
+                                '<td>' + khachquen + '</td>' +
+                                '</tr>' +
+                                '  </tbody>';
+                        });
+                        document.getElementById('tbl_ten').innerHTML += kq;
+                    };
+                };
+                xhttp.open("GET", "/admin/xuattk_tenkh", false);
+                xhttp.send();
+            </script>
+
+
+        </table>
+    </div>
+
+
+    <div id="dautrang">
+        <a href="#" title="Đầu trang">^</a>
+    </div>
+
+
+
+</body>
+
+<script>
+</script>
+
+</html>

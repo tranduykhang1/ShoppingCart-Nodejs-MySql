@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel='stylesheet' href="/Css/menu.css" media="screen" />
+    <title>Menu </title>
+    <script src="/JS/menu.js"></script>
+    <!-- <script src="/ajax/menuajax.js"></script> -->
+</head>
+
+<body>
+    <header class="nav-bar" id="nav">
+        <a href="/home">
+            <h1 id="title">ORIGINAL <span>COFFEE</span></h1>
+        </a>
+        <ul id='links'>
+            <a href="/home">TRANG CHỦ</a>
+            <a href="">GIỚI THIỆU</a>
+            <a href="" class="actived">MENU</a>
+            <a href="/order">MUA NGAY</a>
+            <a href="/donhang">ĐƠN HÀNG</a>
+        </ul>
+    </header>
+    <div id="danh-muc">
+        <div id="danhmuc">DANH MỤC THỨC UỐNG</div>
+        <a href="#cafe">
+            <div class="dm-menu">Cà phê</div>
+        </a>
+        <a href="#daxay">
+            <div class="dm-menu" id="active">Đá xay</div>
+        </a>
+        <a href="#tra">
+            <div class="dm-menu">Trà & Macchiato</div>
+        </a>
+        <a href="#sinhto">
+            <div class="dm-menu">Sinh tố</div>
+        </a>
+    </div>
+
+    <main id="menu-chinh">
+        <div class="menu-all" id="cafe">
+            <h3 class="title-menu">CÀ PHÊ</h3>
+            <script>
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        var cafe = JSON.parse(this.responseText);
+                        let kqcf = "";
+                        cafe.forEach(function(cf) {
+                            kqcf += '<div class=menu>' +
+                                '<img class=img src="' + cf.anh_thucuong + '" title="Ảnh thức uống">' +
+                                '<h3 class="ten-tu">' + cf.ten_thucuong + '</h3>' +
+                                '<h5 class="gia">' + cf.gia_thucuong + 'VNĐ </h5>' +
+                                '<a href = "/Html/order.html" class = "mua" >MUA NGAY </a>' +
+                                '</div>';
+
+                        });
+                        document.getElementById('cafe').innerHTML += kqcf;
+                    }
+                };
+                xhttp.open("GET", "/menucafe", false);
+                xhttp.send();
+            </script>
+        </div>
+
+        <div class="menu-all" id="daxay">
+            <h3 class="title-menu">ĐÁ XAY</h3>
+            <script>
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        var daxay = JSON.parse(this.responseText);
+                        let kqdx = "";
+                        daxay.forEach(function(dx) {
+                            kqdx += '<div class=menu>' +
+                                '<img class=img src="' + dx.anh_thucuong + '" title="Ảnh thức uống">' +
+                                '<h3 class="ten-tu">' + dx.ten_thucuong + '</h3>' +
+                                '<h5 class="gia">' + dx.gia_thucuong + 'VNĐ </h5>' +
+                                '<a href = "/Html/order.html" class = "mua" >MUA NGAY </a>' +
+                                '</div>';
+                        });
+                        document.getElementById('daxay').innerHTML += kqdx;
+                    }
+                };
+                xhttp.open("GET", "/menudaxay", false);
+                xhttp.send();
+            </script>
+        </div>
+
+        <div class="menu-all" id="tra">
+            <h3 class="title-menu">TRÀ</h3>
+            <script>
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        var tra = JSON.parse(this.responseText);
+                        let kqtra = "";
+                        tra.forEach(function(tr) {
+                            kqtra += '<div class=menu>' +
+                                '<img class=img src="' + tr.anh_thucuong + '" title="Ảnh thức uống">' +
+                                '<h3 class="ten-tu">' + tr.ten_thucuong + '</h3>' +
+                                '<h5 class="gia">' + tr.gia_thucuong + 'VNĐ </h5>' +
+                                '<a href = "/Html/order.html" class = "mua" >MUA NGAY </a>' +
+                                '</div>';
+                        });
+                        document.getElementById('tra').innerHTML += kqtra;
+                    }
+                }
+                xhttp.open("GET", "/menutra", false);
+                xhttp.send();
+            </script>
+        </div>
+
+        <div class="menu-all" id="sinhto">
+            <h3 class="title-menu">SINH TỐ</h3>
+            <script>
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState && this.status == 200) {
+                        var sinhto = JSON.parse(this.responseText);
+                        let kqsinhto = "";
+                        sinhto.forEach(function(st) {
+                            kqsinhto += '<div class=menu>' +
+                                '<img class=img src="' + st.anh_thucuong + '" title="Ảnh thức uống">' +
+                                '<h3 class="ten-tu">' + st.ten_thucuong + '</h3>' +
+                                '<h5 class="gia">' + st.gia_thucuong + 'VNĐ </h5>' +
+                                '<a href = "/Html/order.html" class = "mua" >MUA NGAY </a>' +
+                                '</div>';
+                        });
+                        document.getElementById('sinhto').innerHTML += kqsinhto;
+                    }
+                }
+                xhttp.open("GET", "/menusinhto", false);
+                xhttp.send();
+            </script>
+        </div>
+    </main>
+    <footer>
+        <h6 id="title_ft">Đồ án Kỹ Thuật Phần Mềm 1</h6>
+        <h6 id="ten_ft">Trần Duy Khang || Nguyễn Minh Luân</h6>
+    </footer>
+
+</body>
+
+</html>
